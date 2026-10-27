@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <!-- Outer Shield Silhouette -->
+  <path d="M24 3L8 9V22C8 32.5 14.8 42.1 24 45C33.2 42.1 40 32.5 40 22V9L24 3Z" fill="#17191D" />
+  
+  <!-- Geometric Parcel Facets -->
+  <!-- Top Flap -->
+  <polygon points="24,10 34,16 24,22 14,16" fill="#DC161F" />
+  <!-- Left Face -->
+  <polygon points="14,17 23,22.5 23,34 14,28.5" fill="#B90F18" />
+  <!-- Right Face -->
+  <polygon points="25,22.5 34,17 34,28.5 25,34" fill="#E5E7EB" />
+  
+  <!-- Verification Seal Center Node -->
+  <circle cx="24" cy="22.5" r="2.5" fill="#FFFFFF" />
+  <!-- Verification Shield Line -->
+  <path d="M20 28L23 31L28 25" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

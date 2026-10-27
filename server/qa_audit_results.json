@@ -1,0 +1,562 @@
+[
+  {
+    "testId": "AUTH-01",
+    "feature": "Register a valid seller",
+    "expected": "201 Created with JWT token",
+    "actual": "HTTP 201, success: true",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-02",
+    "feature": "Reject missing required fields",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: All registration fields are required (Full Name, Email, Password, Confirm Password, Shop/Store Name, Phone).",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-03",
+    "feature": "Reject invalid email",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Please provide a valid email address.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-04",
+    "feature": "Reject duplicate email",
+    "expected": "400 or 409 Conflict",
+    "actual": "HTTP 409, msg: An account with this email address is already registered.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-05",
+    "feature": "Reject password confirmation mismatch",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Password and confirmation password do not match.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-06",
+    "feature": "Verify password is hashed in MongoDB and never exposed in responses",
+    "expected": "200 OK, password hashes excluded",
+    "actual": "Exposed: false",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-07",
+    "feature": "Login with valid credentials",
+    "expected": "200 OK with new JWT token",
+    "actual": "HTTP 200, token present",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-08",
+    "feature": "Reject incorrect password",
+    "expected": "401 Unauthorized",
+    "actual": "HTTP 401, msg: Invalid credentials. Please verify your email and password.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-09",
+    "feature": "Reject nonexistent user",
+    "expected": "401 Unauthorized",
+    "actual": "HTTP 401, msg: Invalid credentials. Please verify your email and password.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-10",
+    "feature": "Verify protected routes require authentication",
+    "expected": "401 Unauthorized",
+    "actual": "HTTP 401",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-11",
+    "feature": "Reject invalid JWT",
+    "expected": "401 Unauthorized",
+    "actual": "HTTP 401, msg: Invalid authentication token.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-12",
+    "feature": "Reject expired JWT",
+    "expected": "401 Unauthorized",
+    "actual": "HTTP 401, msg: Session expired. Please log in again.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-13",
+    "feature": "Retrieve authenticated profile",
+    "expected": "200 OK with seller details",
+    "actual": "HTTP 200, email: seller_a_1793053767327@parcelproof.pk",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-14",
+    "feature": "Update seller profile",
+    "expected": "200 OK with updated store details",
+    "actual": "HTTP 200, shopName: Tariq Tech & Mobile World",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-15",
+    "feature": "Change password and re-login",
+    "expected": "200 OK and successful login with new password",
+    "actual": "Change: true, NewLogin: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZGZkNDQ3ZmJkYzMwNmQyMDI1YzZmMyIsImlhdCI6MTc5MzA1Mzc2OCwiZXhwIjoxNzkzNjU4NTY4fQ._V4lwICYgNOnjDeQdOcH3xFKEaPRiUOZsMUYhEtHwl8",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-16",
+    "feature": "Logout successfully",
+    "expected": "200 OK with cleared session state",
+    "actual": "HTTP 200, msg: Logged out successfully.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-17",
+    "feature": "Verify session behavior after refresh",
+    "expected": "200 OK with persistent valid session",
+    "actual": "HTTP 200",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "AUTH-18",
+    "feature": "Reject unauthenticated access to private data",
+    "expected": "401 Unauthorized",
+    "actual": "HTTP 401",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-01",
+    "feature": "Create parcel with valid data",
+    "expected": "201 Created with parcel object",
+    "actual": "HTTP 201, ID: 6adfd448fbdc306d2025c70c, Code: PRCL-X2F7TMNQM5",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-02",
+    "feature": "Reject missing required fields",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Please provide all required fields: Order ID, Product Name, Customer Name, Customer Phone, Shipping Address, Courier Company, and Tracking Number.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-03",
+    "feature": "Reject invalid quantity (<= 0)",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Quantity must be a valid integer greater than or equal to 1.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-04",
+    "feature": "Reject negative declared value",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Declared value must be a valid non-negative number.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-05",
+    "feature": "Generate unique parcel code",
+    "expected": "Format PRCL-XXXXXX",
+    "actual": "Generated: PRCL-X2F7TMNQM5",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-06",
+    "feature": "Retrieve seller parcel list",
+    "expected": "200 OK with array of parcels",
+    "actual": "HTTP 200, count: 1",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-07",
+    "feature": "Open parcel details",
+    "expected": "200 OK with linked parcel & evidence array",
+    "actual": "HTTP 200",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-08",
+    "feature": "Edit parcel details",
+    "expected": "200 OK with updated attributes",
+    "actual": "HTTP 200, declaredValue: 86000",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-09",
+    "feature": "Search by parcel code",
+    "expected": "Finds matching parcel by code",
+    "actual": "HTTP 200, found: 1",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-10",
+    "feature": "Search by order ID",
+    "expected": "Finds matching parcel by orderId",
+    "actual": "HTTP 200, found: 1",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-11",
+    "feature": "Search by tracking number",
+    "expected": "Finds matching parcel by tracking number",
+    "actual": "HTTP 200, found: 1",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-12",
+    "feature": "Filter by shipment status",
+    "expected": "Returns only parcels with specified status",
+    "actual": "HTTP 200, all Booked: true",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-13",
+    "feature": "Sort by date",
+    "expected": "200 OK with sorted list",
+    "actual": "HTTP 200",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-14",
+    "feature": "Verify pagination",
+    "expected": "200 OK with currentPage=1 and limit=1",
+    "actual": "HTTP 200, total: 1",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-15",
+    "feature": "Update shipment status",
+    "expected": "200 OK with shipmentStatus changed to In Transit",
+    "actual": "HTTP 200, newStatus: In Transit",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-16",
+    "feature": "Verify status history timeline",
+    "expected": "200 OK with chronological status entries",
+    "actual": "HTTP 200, count: 2",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-17",
+    "feature": "Verify data persists after re-fetching from DB",
+    "expected": "Status remains In Transit",
+    "actual": "HTTP 200, persisted: true",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-18",
+    "feature": "Reject invalid MongoDB ObjectId format",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Resource not found with invalid identifier: invalid-hex-id-999",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-19",
+    "feature": "Return 404 for nonexistent valid ObjectId",
+    "expected": "404 Not Found",
+    "actual": "HTTP 404, msg: Parcel not found or access unauthorized.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PAR-20",
+    "feature": "Prevent cross-seller parcel access (Seller B accessing Seller A)",
+    "expected": "404 Not Found (Unauthorized access denied)",
+    "actual": "HTTP 404",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-01",
+    "feature": "Upload valid JPG evidence",
+    "expected": "201 Created with metadata & SHA-256",
+    "actual": "HTTP 201, ID: 6adfd448fbdc306d2025c746",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-02",
+    "feature": "Upload valid PNG evidence",
+    "expected": "201 Created",
+    "actual": "HTTP 201",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-03",
+    "feature": "Upload valid WEBP evidence",
+    "expected": "201 Created",
+    "actual": "HTTP 201",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-04",
+    "feature": "Upload valid PDF evidence",
+    "expected": "201 Created",
+    "actual": "HTTP 201",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-05",
+    "feature": "Upload valid MP4 evidence",
+    "expected": "201 Created",
+    "actual": "HTTP 201",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-06",
+    "feature": "Reject unsupported file type (.exe)",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Unsupported file type (.exe). Only JPG, JPEG, PNG, WEBP, MP4, and PDF are allowed.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-07",
+    "feature": "Enforce image size limit (reject > 10MB)",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Image files must not exceed 10 MB.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-08",
+    "feature": "Enforce PDF size limit (reject > 10MB)",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: PDF files must not exceed 10 MB.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-09",
+    "feature": "Enforce video size limit (reject > 50MB)",
+    "expected": "400 Bad Request",
+    "actual": "HTTP 400, msg: Video files must not exceed 50 MB.",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-10",
+    "feature": "Verify evidence metadata is stored in MongoDB",
+    "expected": "200 OK with sha256Hash, mimeType, size",
+    "actual": "HTTP 200, Hash: 687f1b39bd04...",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-11",
+    "feature": "Verify files are stored privately (not public URL)",
+    "expected": "404 Not Found on static access",
+    "actual": "HTTP 404",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-12",
+    "feature": "Retrieve evidence list",
+    "expected": "200 OK with array of evidence records",
+    "actual": "HTTP 200, count: 5",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-13",
+    "feature": "Preview image file with inline disposition",
+    "expected": "200 OK, image/jpeg, inline",
+    "actual": "HTTP 200, image/jpeg",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-14",
+    "feature": "Preview video file stream",
+    "expected": "200 OK, video/mp4",
+    "actual": "HTTP 200, video/mp4",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-15",
+    "feature": "Preview or download PDF document",
+    "expected": "200 OK, application/pdf",
+    "actual": "HTTP 200, application/pdf",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-16",
+    "feature": "Download evidence with attachment disposition",
+    "expected": "200 OK, attachment disposition, exact bytes",
+    "actual": "HTTP 200, bytes: 116",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-17",
+    "feature": "Verify evidence linked to correct parcel",
+    "expected": "All evidence items have parcelId === target",
+    "actual": "HTTP 200, all match: true",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-18",
+    "feature": "Prevent unauthorized evidence upload (Seller B into Seller A parcel)",
+    "expected": "404 Not Found (Unauthorized)",
+    "actual": "HTTP 404",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-19",
+    "feature": "Prevent unauthorized evidence download",
+    "expected": "404 Not Found (Unauthorized access denied)",
+    "actual": "HTTP 404",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "EVD-20",
+    "feature": "Prevent unauthorized evidence preview",
+    "expected": "404 Not Found (Unauthorized access denied)",
+    "actual": "HTTP 404",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-01",
+    "feature": "Upload file and generate SHA-256 hash",
+    "expected": "64-character hexadecimal SHA-256 hash",
+    "actual": "Generated: 687f1b39bd0474e6a92c8752feb14351811da476f0f6a5ea5b672c769694d04e",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-02",
+    "feature": "Confirm hash stored in MongoDB",
+    "expected": "Stored hash matches initial calculated hash",
+    "actual": "Stored: 687f1b39bd0474e6a92c8752feb14351811da476f0f6a5ea5b672c769694d04e",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-03",
+    "feature": "Recalculate hash of unchanged file on disk",
+    "expected": "Recalculated hash matches expected",
+    "actual": "Recalculated: 687f1b39bd0474e6a92c8752feb14351811da476f0f6a5ea5b672c769694d04e",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-04",
+    "feature": "Confirm matching hash verification state",
+    "expected": "verification.isValid === true",
+    "actual": "isValid: true",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-05",
+    "feature": "Modify controlled test copy of stored file on disk",
+    "expected": "File byte altered on disk",
+    "actual": "1 byte tampered",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-06",
+    "feature": "Verify SHA-256 mismatch detection on tampered file",
+    "expected": "verification.isValid === false with failure explanation",
+    "actual": "isValid: false",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-07",
+    "feature": "Verify missing-file handling on verification endpoint",
+    "expected": "404 Not Found with structured fileMissing explanation",
+    "actual": "HTTP 404, fileMissing: true",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "HASH-08",
+    "feature": "Confirm accurate user-facing result messages & disclaimer",
+    "expected": "Includes clear technical distinction between digital file integrity and physical parcel contents",
+    "actual": "Disclaimer verified: true",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "DASH-01",
+    "feature": "Verify empty dashboard state for new seller",
+    "expected": "All metrics 0, empty recent arrays",
+    "actual": "totalParcels: 0, totalEvidence: 0",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "DASH-02",
+    "feature": "Verify dashboard reflects real MongoDB aggregations for active seller",
+    "expected": "Counts dynamically match DB records",
+    "actual": "totalParcels: 1, inTransit: 1, totalEvidence: 5",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PLAN-01",
+    "feature": "Verify no fake business APIs exist for planned modules",
+    "expected": "404 Not Found on /api/returns, /api/disputes, /api/reports",
+    "actual": "Returns: 404, Disputes: 404, Reports: 404",
+    "status": "Pass",
+    "details": ""
+  },
+  {
+    "testId": "PLAN-02",
+    "feature": "Verify frontend routes open for planned modules (/returns, /disputes, /reports)",
+    "expected": "HTTP 200 OK HTML for SPA routing",
+    "actual": "Returns: 200, Disputes: 200, Reports: 200",
+    "status": "Pass",
+    "details": ""
+  }
+]
