@@ -4,6 +4,18 @@ ParcelProof is a professional MERN stack web application engineered for online s
 
 ---
 
+## Application Previews
+
+| Overview Dashboard | Parcel & Shipment Management |
+| :---: | :---: |
+| ![Overview Dashboard](screenshots/01-dashboard.png) | ![Parcel Management](screenshots/02-parcels.png) |
+
+| Packing Evidence Library |
+| :---: |
+| ![Evidence Library](screenshots/03-evidence.png) |
+
+---
+
 ## 1. Core Architecture & Modules
 
 The system encompasses six core business modules along with an integrated Overview Dashboard:
